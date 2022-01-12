@@ -1,0 +1,77 @@
+{
+  "name": "@irooty/vue-global-events",
+  "version": "0.3.3",
+  "private": false,
+  "main": "./dist/index.umd.min.js",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "build:lib": "vue-cli-service build --target lib --name index src/index.js",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "core-js": "^3.6.5",
+    "vue": "^3.0.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^7.0.0"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "rules": {
+    "generator-star-spacing": "off",
+    "no-tabs":"off",
+    "no-unused-vars":"off",
+    "no-console":"off",
+    "no-irregular-whitespace":"off",
+    "no-debugger": "off"
+  },
+  "author": {
+    "name": "Yang Yi Yun",
+    "email": "549193112@qq.com"
+  },
+  "homepage": "https://github.com/irooty/vue-global-events",
+  "bugs": {
+    "url": "https://github.com/irooty/vue-global-events/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:irooty/vue-global-events.git"
+  },
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/irooty/vue-global-events/LICENSE-MIT"
+    }
+  ],
+  "files": [
+    "lib/",
+    "dist/",
+    "scripts/",
+    "LICENSE"
+  ]
+}

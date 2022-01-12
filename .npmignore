@@ -1,0 +1,16 @@
+dist/*.map
+node_modules
+public
+build
+src
+.idea
+.babelrc
+.eslintrc.js
+.editorconfig
+.browserslistrc
+.gitignore
+babel.config.js
+index.html
+package-lock.json
+vue.config.js
+webpack.config.js
