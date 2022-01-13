@@ -2,7 +2,7 @@
  * 接口地址
  * @type {string}
  */
-const PATH = "/base/file/upload/news";
+const PATH = "/mobile/platThemeBbsArticle/test";
 /**
  * 事假类型
  * @type {{VIEWS: string, LIKE: string, FAVORITE: string, SHARE: string, REVIEW: string, VISIT: string, OTHER: string}}
@@ -36,53 +36,62 @@ const Plugin = function (app, options) {
 };
 /**
  * 浏览
+ * @param data 用户数据
  */
-Plugin.prototype.views = function () {
-    process(this.options.request,EventType.VIEWS);
+Plugin.prototype.views = function (data) {
+    process(this.options.request,EventType.VIEWS,data);
 };
 /**
  * 点赞
+ * @param data 用户数据
  */
-Plugin.prototype.like = function () {
-    process(this.options.request,EventType.LIKE);
+Plugin.prototype.like = function (data) {
+    process(this.options.request,EventType.LIKE,data);
 };
 /**
  * 收藏
+ * @param data 用户数据
  */
-Plugin.prototype.favorite = function () {
-    process(this.options.request,EventType.FAVORITE);
+Plugin.prototype.favorite = function (data) {
+    process(this.options.request,EventType.FAVORITE,data);
 };
 /**
  * 分享
+ * @param data 用户数据
  */
-Plugin.prototype.share = function () {
-    process(this.options.request,EventType.SHARE);
+Plugin.prototype.share = function (data) {
+    process(this.options.request,EventType.SHARE,data);
 };
 /**
  * 评论
+ * @param data 用户数据
  */
-Plugin.prototype.review = function () {
-    process(this.options.request,EventType.REVIEW);
+Plugin.prototype.review = function (data) {
+    process(this.options.request,EventType.REVIEW,data);
 };
 /**
  * 参与
+ * @param data 用户数据
  */
-Plugin.prototype.visit = function () {
-    process(this.options.request,EventType.VISIT);
+Plugin.prototype.visit = function (data) {
+    process(this.options.request,EventType.VISIT,data);
 };
 /**
  * 其它
+ * @param data 用户数据
  */
-Plugin.prototype.other = function () {
-    process(this.options.request,EventType.OTHER);
+Plugin.prototype.other = function (data) {
+    process(this.options.request,EventType.OTHER,data);
 };
 /**
  * 统一调后台
  * @param request 请求对象
  * @param type 事假类型
+ * @param data 用户数据
  */
-function process(request,type) {
-    let params = {};
+function process(request,type,data) {
+    let params = Object.assign({},data);
+    params.eventType = type;
     (function (params) {
         return request({
             url: PATH,
@@ -105,49 +114,49 @@ export default {
     install: (app, options) => {
         const userEvents =  new Plugin(app,options);
         window._UserEvents = userEvents;
-        app.config.globalProperties._$views = () => {
-            userEvents.views();
+        app.config.globalProperties._$views = (data) => {
+            userEvents.views(data);
         };
-        app.config.globalProperties._$like = () => {
-            userEvents.like();
+        app.config.globalProperties._$like = (data) => {
+            userEvents.like(data);
         };
-        app.config.globalProperties._$favorite = () => {
-            userEvents.favorite();
+        app.config.globalProperties._$favorite = (data) => {
+            userEvents.favorite(data);
         };
-        app.config.globalProperties._$share = () => {
-            userEvents.share();
+        app.config.globalProperties._$share = (data) => {
+            userEvents.share(data);
         };
-        app.config.globalProperties._$review = () => {
-            userEvents.review();
+        app.config.globalProperties._$review = (data) => {
+            userEvents.review(data);
         };
-        app.config.globalProperties._$visit= () => {
-            userEvents.visit();
+        app.config.globalProperties._$visit= (data) => {
+            userEvents.visit(data);
         };
-        app.config.globalProperties._$other = () => {
-            userEvents.other();
+        app.config.globalProperties._$other = (data) => {
+            userEvents.other(data);
         };
-        app.config.globalProperties.$onUserEvent = (type) => {
+        app.config.globalProperties.$onUserEvent = (type,data) => {
             switch (type){
                 case EventType.VIEWS:
-                    userEvents.views();
+                    userEvents.views(data);
                     break;
                 case EventType.LIKE:
-                    userEvents.like();
+                    userEvents.like(data);
                     break;
                 case EventType.FAVORITE:
-                    userEvents.favorite();
+                    userEvents.favorite(data);
                     break;
                 case EventType.SHARE:
-                    userEvents.share();
+                    userEvents.share(data);
                     break;
                 case EventType.REVIEW:
-                    userEvents.review();
+                    userEvents.review(data);
                     break;
                 case EventType.VISIT:
-                    userEvents.visit();
+                    userEvents.visit(data);
                     break;
                 case EventType.OTHER:
-                    userEvents.other();
+                    userEvents.other(data);
             }
         };
         console.info("UserEvents插件嘤嘤嘤....",options);
