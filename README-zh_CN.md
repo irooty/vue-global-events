@@ -1,6 +1,6 @@
 # vue-global-events [![npm](https://img.shields.io/npm/v/vue-global-events.svg)](vue-global-events) ![npm](https://img.shields.io/npm/dt/vue-global-events.svg)
 
-> 全局用户插件
+> 全局用户事件插件
 
 该插件使用 Vue 3 + 版本
 
