@@ -180,6 +180,5 @@ export default {
                     userEvents.other(data);
             }
         };
-        console.info("UserEvents插件嘤嘤嘤安装成功....",options);
     }
 }

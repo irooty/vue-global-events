@@ -1,48 +1,48 @@
 # vue-global-events [![npm](https://img.shields.io/npm/v/vue-global-events.svg)](vue-global-events) ![npm](https://img.shields.io/npm/dt/vue-global-events.svg)
 
-> global events plugin
+> 全局用户插件
 
-This is the version for Vue 3
+该插件使用 Vue 3 + 版本
 
-English | [简体中文](./README-zh_CN.md)
+[English](./README.md) | 简体中文
 
-## Installation
+## 安装插件
 
 ```bash
 npm install @irooty/vue-global-events --save
 ```
 
-## Usage
+## 使用插件
 
 ```js
-import request from './libs/request' // Please import your Request
+import request from './libs/request' // 请引入你的 Request
 import GlobalEvents from '@irooty/vue-global-events';
-// register globally
+// 全局注册
 Vue.use(GlobalEvents,{request: request});
 ```
 
-After that you can register global events like this:
+插件使用方法:
 
 ```javascript
 let data = {
-    subjectType: _UserEvents.subjectType.POSTS, // Subject Type
-    // ... other param
-}; // User params
+    subjectType: _UserEvents.subjectType.POSTS, // 题材类型 “帖子”
+    // ... 其它参数
+}; // 用户参数
 _UserEvents.views(data);
-// OR
+// 或
 this._$views(data);
-// OR
+// 或
 this.$onUserEvent(_UserEvents.eventType.VIEWS,data);
 ```
-### Props
+### 属性
 
 #### `eventType`
-User Event Type, ex.`_UserEvents.eventType.VIEWS`.
+用户事件类型, 使用方法`_UserEvents.eventType.VIEWS`.
 
 - type: `Enum`
 - value: `String`
 
-##### enums
+##### 枚举列表
 
 - `VIEWS`: 浏览
 - `LIKE`: 点赞
@@ -53,12 +53,12 @@ User Event Type, ex.`_UserEvents.eventType.VIEWS`.
 - `OTHER`: 其它
 
 #### `subjectType`
-Content Subject Type, ex.`_UserEvents.subjectType.ARTICLE`.
+内容题材类型, ex.`_UserEvents.subjectType.ARTICLE`.
 
 - type: `Enum`
 - value: `String`
 
-##### enums
+##### 枚举列表
 
 - `ARTICLE`: 图文
 - `POSTS`: 帖子
@@ -68,8 +68,8 @@ Content Subject Type, ex.`_UserEvents.subjectType.ARTICLE`.
 - `VOTE`: 投票
 - `SECTION`: 栏目
 
-## Methods
-All Methods
+## 方法
+所有方法列表
 ```javascript
 // 浏览
 _UserEvents.views(data);
@@ -85,7 +85,7 @@ _UserEvents.review(data);
 _UserEvents.visit(data);
 // 其它
 _UserEvents.other(data);
-/*  === OR ===  */
+/*  === 或 ===  */
 // 浏览
 this._$views(data);
 // 点赞
@@ -100,26 +100,29 @@ this._$review(data);
 this._$visit(data);
 // 其它
 this._$other(data);
-/*  === OR ===  */
+/*  === 或 ===  */
 this.$onUserEvent(_UserEvents.eventType.VIEWS,data);
 ```
 
-## Build Setup
+## 开发步骤
 
 ``` bash
-# install dependencies
+# 安装依赖
 npm install
 
-# serve with hot reload at localhost:8080
+# 热部署 localhost:8080
 npm run dev
 
-# build for production with minification
+# 打包
 npm run build
 
-# publish
+# 打包成插件
+npm run build:lib
+
+# 发布插件
 npm publish --access public
 
-# unpublish force
+# 强制移除发布
 npm unpublish @irooty/vue-global-events --force
 ```
 
