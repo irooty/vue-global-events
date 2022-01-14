@@ -22,13 +22,50 @@ Vue.use(GlobalEvents,{request: request});
 After that you can register global events like this:
 
 ```javascript
-let data = {}; // User params
+let data = {
+    subjectType: _UserEvents.subjectType.POSTS, // Subject Type
+    // ... other param
+}; // User params
 _UserEvents.views(data);
 // OR
 this._$views(data);
 // OR
 this.$onUserEvent(_UserEvents.eventType.VIEWS,data);
 ```
+### Props
+
+#### `eventType`
+User Event Type, ex.`_UserEvents.eventType.VIEWS`.
+
+- type: `Enum`
+- value: `String`
+
+##### enums
+
+- `VIEWS`: 浏览
+- `LIKE`: 点赞
+- `FAVORITE`: 收藏
+- `SHARE`: 分享
+- `REVIEW`: 评论
+- `VISIT`: 参与
+- `OTHER`: 其它
+
+#### `subjectType`
+Content Subject Type, ex.`_UserEvents.subjectType.ARTICLE`.
+
+- type: `Enum`
+- value: `String`
+
+##### enums
+
+- `ARTICLE`: 图文
+- `POSTS`: 帖子
+- `COMMENT`: 评论
+- `EXAM`: 答题
+- `ANSWER`: 问卷
+- `VOTE`: 投票
+- `SECTION`: 栏目
+
 ## Methods
 All Methods
 ```javascript

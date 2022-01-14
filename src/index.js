@@ -4,7 +4,7 @@
  */
 const PATH = "/mobile/platThemeBbsArticle/test";
 /**
- * 事假类型
+ * 事件类型
  * @type {{VIEWS: string, LIKE: string, FAVORITE: string, SHARE: string, REVIEW: string, VISIT: string, OTHER: string}}
  */
 const EventType = {
@@ -24,6 +24,26 @@ const EventType = {
     OTHER: "106"
 };
 /**
+ * 题材类型
+ * @type {{ARTICLE: string, POSTS: string, COMMENT: string, EXAM: string, ANSWER: string, VOTE: string, SECTION: string}}
+ */
+const SubjectType = {
+    /* 图文 */
+    ARTICLE: "00",
+    /* 帖子 */
+    POSTS: "01",
+    /* 评论 */
+    COMMENT: "02",
+    /* 答题 */
+    EXAM: "03",
+    /* 问卷 */
+    ANSWER: "04",
+    /* 投票 */
+    VOTE: "05",
+    /* 栏目 */
+    SECTION: "06"
+};
+/**
  * 插件构造方法
  * @param app
  * @param options
@@ -33,6 +53,7 @@ const Plugin = function (app, options) {
     this.app = app;
     this.options = options;
     this.eventType = EventType;
+    this.subjectType = SubjectType;
 };
 /**
  * 浏览
@@ -159,6 +180,6 @@ export default {
                     userEvents.other(data);
             }
         };
-        console.info("UserEvents插件嘤嘤嘤....",options);
+        console.info("UserEvents插件嘤嘤嘤安装成功....",options);
     }
 }
