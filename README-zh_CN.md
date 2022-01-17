@@ -25,7 +25,7 @@ Vue.use(GlobalEvents,{request: request});
 
 ```javascript
 let data = {
-    subjectType: _UserEvents.subjectType.POSTS, // 题材类型 “帖子”
+    ucType: _UserEvents.subjectType.POSTS, // 题材类型 “帖子”
     // ... 其它参数
 }; // 用户参数
 _UserEvents.views(data);
@@ -56,7 +56,7 @@ let data = {
 ### 属性
 
 #### `eventType`
-用户事件类型, 使用方法`_UserEvents.eventType.VIEWS`.
+用户事件类型, 使用方式：`_UserEvents.eventType.VIEWS`.
 
 - type: `Enum`
 - value: `String`
@@ -64,15 +64,22 @@ let data = {
 ##### 枚举列表
 
 - `VIEWS`: 浏览
+- `CLICK`: 点击
 - `LIKE`: 点赞
-- `FAVORITE`: 收藏
+- `ULIKE`: 取消点赞
+- `FAV`: 收藏
+- `UFAV`: 取消收藏
 - `SHARE`: 分享
-- `REVIEW`: 评论
-- `VISIT`: 参与
+- `USHARE`: 取消分享
+- `COMMENT`: 评论
+- `UCOMMENT`: 取消评论
+- `STAY`: 停留
+- `PV`: 浏览百分比
+- `JOIN`: 参与
 - `OTHER`: 其它
 
 #### `subjectType`
-内容题材类型, ex.`_UserEvents.subjectType.ARTICLE`.
+内容题材类型, 使用方式：`_UserEvents.subjectType.ARTICLE`.
 
 - type: `Enum`
 - value: `String`
