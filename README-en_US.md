@@ -4,7 +4,7 @@
 
 This is the version for Vue 3
 
-English | [简体中文](./README-zh_CN.md)
+English | [简体中文](./README.md)
 
 ## Installation
 
@@ -98,6 +98,8 @@ All Methods
 ```javascript
 // 浏览
 _UserEvents.views(data);
+// 点击
+_UserEvents.click(data);
 // 点赞
 _UserEvents.like(data);
 // 取消点赞
@@ -125,6 +127,8 @@ _UserEvents.other(data);
 /*  === OR ===  */
 // 浏览
 this._$views(data);
+// 点击
+this._$click(data);
 // 点赞
 this._$like(data);
 // 取消点赞

@@ -77,6 +77,13 @@ Plugin.prototype.views = function (data) {
     process(this.options.request,EventType.VIEWS,data);
 };
 /**
+ * 点击
+ * @param data 用户数据
+ */
+Plugin.prototype.click = function (data) {
+    process(this.options.request,EventType.CLICK,data);
+};
+/**
  * 点赞
  * @param data 用户数据
  */
@@ -216,6 +223,9 @@ export default {
         app.config.globalProperties._$views = (data) => {
             userEvents.views(data);
         };
+        app.config.globalProperties._$click = (data) => {
+            userEvents.click(data);
+        };
         app.config.globalProperties._$like = (data) => {
             userEvents.like(data);
         };
@@ -256,6 +266,9 @@ export default {
             switch (type){
                 case EventType.VIEWS:
                     userEvents.views(data);
+                    break;
+                case EventType.CLICK:
+                    userEvents.click(data);
                     break;
                 case EventType.LIKE:
                     userEvents.like(data);
