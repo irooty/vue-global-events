@@ -2,26 +2,40 @@
  * 接口地址
  * @type {string}
  */
-const PATH = "/mobile/platThemeBbsArticle/test";
+const PATH = "/base/event/syncSend";
 /**
  * 事件类型
- * @type {{VIEWS: string, LIKE: string, FAVORITE: string, SHARE: string, REVIEW: string, VISIT: string, OTHER: string}}
+ * @type {{VIEWS: string, CLICK: string, LIKE: string, ULIKE: string, FAV: string, UFAV: string, SHARE: string, USHARE: string, COMMENT: string, UCOMMENT: string, STAY: string, PV: string, JOIN: string, OTHER: string}}
  */
 const EventType = {
     /* 浏览 */
-    VIEWS: "100",
+    VIEWS: "views",
+    /* 点击 */
+    CLICK: "click",
     /* 点赞 */
-    LIKE: "101",
+    LIKE: "like",
+    /* 取消点赞 */
+    ULIKE: "ulike",
     /* 收藏 */
-    FAVORITE: "102",
+    FAV: "fav",
+    /* 取消收藏 */
+    UFAV: "ufav",
     /* 分享 */
-    SHARE: "103",
+    SHARE: "share",
+    /* 取消分享 */
+    USHARE: "ushare",
     /* 评论 */
-    REVIEW: "104",
+    COMMENT: "comment",
+    /* 取消评论 */
+    UCOMMENT: "ucomment",
+    /* 停留 */
+    STAY: "stay",
+    /* 浏览百分比 */
+    PV: "pv",
     /* 参与 */
-    VISIT: "105",
-    /* 其它 */
-    OTHER: "106"
+    JOIN: "join",
+    /* 其他 */
+    OTHER: "other"
 };
 /**
  * 题材类型
@@ -70,11 +84,25 @@ Plugin.prototype.like = function (data) {
     process(this.options.request,EventType.LIKE,data);
 };
 /**
+ * 取消点赞
+ * @param data 用户数据
+ */
+Plugin.prototype.ulike = function (data) {
+    process(this.options.request,EventType.ULIKE,data);
+};
+/**
  * 收藏
  * @param data 用户数据
  */
 Plugin.prototype.favorite = function (data) {
-    process(this.options.request,EventType.FAVORITE,data);
+    process(this.options.request,EventType.FAV,data);
+};
+/**
+ * 取消收藏
+ * @param data 用户数据
+ */
+Plugin.prototype.ufavorite = function (data) {
+    process(this.options.request,EventType.UFAV,data);
 };
 /**
  * 分享
@@ -84,18 +112,46 @@ Plugin.prototype.share = function (data) {
     process(this.options.request,EventType.SHARE,data);
 };
 /**
+ * 取消分享
+ * @param data 用户数据
+ */
+Plugin.prototype.ushare = function (data) {
+    process(this.options.request,EventType.USHARE,data);
+};
+/**
  * 评论
  * @param data 用户数据
  */
-Plugin.prototype.review = function (data) {
-    process(this.options.request,EventType.REVIEW,data);
+Plugin.prototype.comment = function (data) {
+    process(this.options.request,EventType.COMMENT,data);
+};
+/**
+ * 取消评论
+ * @param data 用户数据
+ */
+Plugin.prototype.ucomment = function (data) {
+    process(this.options.request,EventType.UCOMMENT,data);
+};
+/**
+ * 停留
+ * @param data 用户数据
+ */
+Plugin.prototype.stay = function (data) {
+    process(this.options.request,EventType.STAY,data);
+};
+/**
+ * 浏览百分比
+ * @param data 用户数据
+ */
+Plugin.prototype.pv = function (data) {
+    process(this.options.request,EventType.PV,data);
 };
 /**
  * 参与
  * @param data 用户数据
  */
-Plugin.prototype.visit = function (data) {
-    process(this.options.request,EventType.VISIT,data);
+Plugin.prototype.join = function (data) {
+    process(this.options.request,EventType.JOIN,data);
 };
 /**
  * 其它
@@ -111,13 +167,15 @@ Plugin.prototype.other = function (data) {
  * @param data 用户数据
  */
 function process(request,type,data) {
+    const pass = validate(data);
+    if (!pass) return;
     let params = Object.assign({},data);
-    params.eventType = type;
+    params.event = type;
     (function (params) {
         return request({
             url: PATH,
-            method: "get",
-            params: params,
+            method: "post",
+            data: params,
         });
     })(params)
         .then((res) => {
@@ -126,6 +184,26 @@ function process(request,type,data) {
         .catch((error)=>{
             console.error(error);
         });
+}
+
+function validate(data) {
+    if(!data){
+        console.error("参数不能为空！");
+        return false;
+    }
+    if(data.constructor !== Object){
+        console.error("参数必须是一个对象！");
+        return false;
+    }
+    if(!data.msgId){
+        console.error("msgId-事件id不能为空！");
+        return false;
+    }
+    if(!data.ucType){
+        console.error("ucType-主题类型不能为空！");
+        return false;
+    }
+    return true;
 }
 
 /**
@@ -141,17 +219,35 @@ export default {
         app.config.globalProperties._$like = (data) => {
             userEvents.like(data);
         };
+        app.config.globalProperties._$ulike = (data) => {
+            userEvents.ulike(data);
+        };
         app.config.globalProperties._$favorite = (data) => {
             userEvents.favorite(data);
+        };
+        app.config.globalProperties._$ufavorite = (data) => {
+            userEvents.ufavorite(data);
         };
         app.config.globalProperties._$share = (data) => {
             userEvents.share(data);
         };
-        app.config.globalProperties._$review = (data) => {
-            userEvents.review(data);
+        app.config.globalProperties._$ushare = (data) => {
+            userEvents.ushare(data);
         };
-        app.config.globalProperties._$visit= (data) => {
-            userEvents.visit(data);
+        app.config.globalProperties._$comment = (data) => {
+            userEvents.comment(data);
+        };
+        app.config.globalProperties._$ucomment = (data) => {
+            userEvents.ucomment(data);
+        };
+        app.config.globalProperties._$stay= (data) => {
+            userEvents.stay(data);
+        };
+        app.config.globalProperties._$pv= (data) => {
+            userEvents.pv(data);
+        };
+        app.config.globalProperties._$join= (data) => {
+            userEvents.join(data);
         };
         app.config.globalProperties._$other = (data) => {
             userEvents.other(data);
@@ -164,17 +260,35 @@ export default {
                 case EventType.LIKE:
                     userEvents.like(data);
                     break;
-                case EventType.FAVORITE:
+                case EventType.ULIKE:
+                    userEvents.ulike(data);
+                    break;
+                case EventType.FAV:
                     userEvents.favorite(data);
+                    break;
+                case EventType.UFAV:
+                    userEvents.ufavorite(data);
                     break;
                 case EventType.SHARE:
                     userEvents.share(data);
                     break;
-                case EventType.REVIEW:
-                    userEvents.review(data);
+                case EventType.USHARE:
+                    userEvents.ushare(data);
                     break;
-                case EventType.VISIT:
-                    userEvents.visit(data);
+                case EventType.COMMENT:
+                    userEvents.comment(data);
+                    break;
+                case EventType.UCOMMENT:
+                    userEvents.ucomment(data);
+                    break;
+                case EventType.STAY:
+                    userEvents.stay(data);
+                    break;
+                case EventType.PV:
+                    userEvents.pv(data);
+                    break;
+                case EventType.JOIN:
+                    userEvents.join(data);
                     break;
                 case EventType.OTHER:
                     userEvents.other(data);
