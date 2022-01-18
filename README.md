@@ -28,11 +28,11 @@ let data = {
     ucType: _UserEvents.subjectType.POSTS, // 题材类型 “帖子”
     // ... 其它参数
 }; // 用户参数
-_UserEvents.views(data);
+_UserEvents.like(data);
 // 或
-this._$views(data);
+this._$like(data);
 // 或
-this.$onUserEvent(_UserEvents.eventType.VIEWS,data);
+this.$onUserEvent(_UserEvents.eventType.LIKE,data);
 ```
 
 ### 参数
@@ -63,8 +63,7 @@ let data = {
 
 ##### 枚举列表
 
-- `VIEWS`: 浏览
-- `CLICK`: 点击
+- `CLICK`: 点击（浏览）
 - `LIKE`: 点赞
 - `ULIKE`: 取消点赞
 - `FAV`: 收藏
@@ -97,9 +96,7 @@ let data = {
 ## 方法
 所有方法列表
 ```javascript
-// 浏览
-_UserEvents.views(data);
-// 点击
+// 点击（浏览）
 _UserEvents.click(data);
 // 点赞
 _UserEvents.like(data);
@@ -125,10 +122,9 @@ _UserEvents.pv(data);
 _UserEvents.join(data);
 // 其它
 _UserEvents.other(data);
-/*  === 或 ===  */
-// 浏览
-this._$views(data);
-// 点击
+
+/*  ====== 或 ====== */
+// 点击（浏览）
 this._$click(data);
 // 点赞
 this._$like(data);
@@ -154,8 +150,9 @@ this._$pv(data);
 this._$join(data);
 // 其它
 this._$other(data);
-/*  === 或 ===  */
-this.$onUserEvent(_UserEvents.eventType.VIEWS,data);
+
+/*  ====== 或 ====== */
+this.$onUserEvent(_UserEvents.eventType.LIKE,data); // 点赞
 ```
 
 ## 开发步骤

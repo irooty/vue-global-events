@@ -28,11 +28,11 @@ let data = {
     ucType: _UserEvents.subjectType.POSTS, // Subject Type
     // ... other param
 }; // User params
-_UserEvents.views(data);
+_UserEvents.like(data);
 // OR
-this._$views(data);
+this._$like(data);
 // OR
-this.$onUserEvent(_UserEvents.eventType.VIEWS,data);
+this.$onUserEvent(_UserEvents.eventType.LIKE,data);
 ```
 ### Params
 User params 
@@ -62,8 +62,7 @@ User Event Type, ex.`_UserEvents.eventType.VIEWS`.
 
 ##### enums
 
-- `VIEWS`: 浏览
-- `CLICK`: 点击
+- `CLICK`: 点击（浏览）
 - `LIKE`: 点赞
 - `ULIKE`: 取消点赞
 - `FAV`: 收藏
@@ -96,9 +95,7 @@ Content Subject Type, ex.`_UserEvents.subjectType.ARTICLE`.
 ## Methods
 All Methods
 ```javascript
-// 浏览
-_UserEvents.views(data);
-// 点击
+// 点击（浏览）
 _UserEvents.click(data);
 // 点赞
 _UserEvents.like(data);
@@ -124,10 +121,9 @@ _UserEvents.pv(data);
 _UserEvents.join(data);
 // 其它
 _UserEvents.other(data);
-/*  === OR ===  */
-// 浏览
-this._$views(data);
-// 点击
+
+/*  ====== 或 ====== */
+// 点击（浏览）
 this._$click(data);
 // 点赞
 this._$like(data);
@@ -153,8 +149,9 @@ this._$pv(data);
 this._$join(data);
 // 其它
 this._$other(data);
-/*  === OR ===  */
-this.$onUserEvent(_UserEvents.eventType.VIEWS,data);
+
+/*  ====== 或 ====== */
+this.$onUserEvent(_UserEvents.eventType.LIKE,data); // 点赞
 ```
 
 ## Build Setup
