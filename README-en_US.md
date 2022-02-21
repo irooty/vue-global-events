@@ -75,6 +75,7 @@ User Event Type, ex.`_UserEvents.eventType.VIEWS`.
 - `PV`: 浏览百分比
 - `JOIN`: 参与
 - `OTHER`: 其它
+- `SEND`: 发帖
 
 #### `subjectType`
 Content Subject Type, ex.`_UserEvents.subjectType.ARTICLE`.
@@ -121,6 +122,8 @@ _UserEvents.pv(data);
 _UserEvents.join(data);
 // 其它
 _UserEvents.other(data);
+// 发帖
+_UserEvents.send(data);
 
 /*  ====== 或 ====== */
 // 点击（浏览）
@@ -149,6 +152,8 @@ this._$pv(data);
 this._$join(data);
 // 其它
 this._$other(data);
+// 发帖
+this._$send(data);
 
 /*  ====== 或 ====== */
 this.$onUserEvent(_UserEvents.eventType.LIKE,data); // 点赞

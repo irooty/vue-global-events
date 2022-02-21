@@ -35,7 +35,9 @@ const EventType = {
     /* 参与 */
     JOIN: "join",
     /* 其他 */
-    OTHER: "other"
+    OTHER: "other",
+    /* 发帖 */
+    SEND: "send"
 };
 /**
  * 题材类型
@@ -168,6 +170,13 @@ Plugin.prototype.other = function (data) {
     process(this.options.request,EventType.OTHER,data);
 };
 /**
+ * 发帖
+ * @param data 用户数据
+ */
+Plugin.prototype.send = function (data) {
+    process(this.options.request,EventType.SEND,data);
+};
+/**
  * 统一调后台
  * @param request 请求对象
  * @param type 事假类型
@@ -262,6 +271,9 @@ export default {
         app.config.globalProperties._$other = (data) => {
             userEvents.other(data);
         };
+        app.config.globalProperties._$send = (data) => {
+            userEvents.send(data);
+        };
         app.config.globalProperties.$onUserEvent = (type,data) => {
             switch (type){
                 case EventType.VIEWS:
@@ -302,6 +314,9 @@ export default {
                     break;
                 case EventType.JOIN:
                     userEvents.join(data);
+                    break;
+                case EventType.SEND:
+                    userEvents.send(data);
                     break;
                 case EventType.OTHER:
                     userEvents.other(data);
