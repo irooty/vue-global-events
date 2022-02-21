@@ -76,6 +76,7 @@ let data = {
 - `PV`: 浏览百分比
 - `JOIN`: 参与
 - `OTHER`: 其它
+- `SEND`: 发帖
 
 #### `subjectType`
 内容题材类型, 使用方式：`_UserEvents.subjectType.ARTICLE`.
@@ -122,6 +123,8 @@ _UserEvents.pv(data);
 _UserEvents.join(data);
 // 其它
 _UserEvents.other(data);
+// 发帖
+_UserEvents.send(data);
 
 /*  ====== 或 ====== */
 // 点击（浏览）
@@ -150,6 +153,8 @@ this._$pv(data);
 this._$join(data);
 // 其它
 this._$other(data);
+// 发帖
+this._$send(data);
 
 /*  ====== 或 ====== */
 this.$onUserEvent(_UserEvents.eventType.LIKE,data); // 点赞
